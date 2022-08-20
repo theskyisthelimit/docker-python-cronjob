@@ -1,5 +1,4 @@
 FROM python:3.9
-FROM linuxserver/tautulli:latest
 RUN apt-get update && apt-get -y install cron nano
 RUN pip install --upgrade pip
 RUN python3.9 -m pip install requests
