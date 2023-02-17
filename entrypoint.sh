@@ -6,5 +6,8 @@ echo "$CRON_SCHEDULE" > /etc/cron.d/crontab
 # Set the correct permissions on the crontab file
 chmod 0644 /etc/cron.d/crontab
 
-# Start the cron daemon
-crond -f
+# Start the cron daemon using the cron package
+service cron start
+
+# Keep the container running
+tail -f /dev/null
