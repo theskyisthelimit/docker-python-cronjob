@@ -3,9 +3,10 @@ RUN apt-get update && apt-get -y install cron nano
 RUN pip install --upgrade pip
 RUN python3.9 -m pip install requests psycopg2-binary pytz
 WORKDIR /app
+COPY crontab /etc/cron.d/crontab
 COPY hello.py /app/hello.py
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+RUN chmod 0644 /etc/cron.d/crontab
+RUN /usr/bin/crontab /etc/cron.d/crontab
 
-# run the entrypoint.sh script as main process of container
-CMD ["/entrypoint.sh"]
+# run crond as main process of container
+CMD ["cron", "-f"]
